@@ -13,11 +13,11 @@ describe DB2Fog do
   end
 
   def load_schema
-    `cat '#{File.dirname(__FILE__) + '/mysql_schema.sql'}' | mysql -u #{DBConfig[:user]} -p#{DBConfig[:password]} #{DBConfig[:database]}`
+    `cat '#{File.dirname(__FILE__) + '/mysql_schema.sql'}' | mysql -u #{DBConfig[:username]}#{" -p#{DBConfig[:password]}" if DBConfig[:password]} #{DBConfig[:database]}`
   end
 
   def drop_schema
-    `cat '#{File.dirname(__FILE__) + '/mysql_drop_schema.sql'}' | mysql -u #{DBConfig[:user]} -p#{DBConfig[:password]} #{DBConfig[:database]}`
+    `cat '#{File.dirname(__FILE__) + '/mysql_drop_schema.sql'}' | mysql -u #{DBConfig[:username]}#{" -p#{DBConfig[:password]}" if DBConfig[:password]} #{DBConfig[:database]}`
   end
 
   def backup_files
